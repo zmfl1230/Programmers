@@ -22,7 +22,7 @@ class Node {
 
 }
 /**
- * 한번 틀린 이유: row, co;의 깂을 기준으로 int형트로 해당 자리의 위치를 지정하는 부분이 있는데 
+ * 한번 틀린 이유: row, col의 깂을 기준으로 int형트로 해당 자리의 위치를 지정하는 부분이 있는데 
  * 이때 colSize * row + col 로 위치 값을 지정해줘야 하는 것을
  * rowSize * row + col로 지정해줬다. 지는 row == col 인 경우만 가능해야 하는데, 이를 생각하지 못하고 사용했다.
  * 
@@ -142,6 +142,7 @@ public class Laboratory {
                     if (newRow < 0 || newRow > rowSize - 1 || newCol < 0 || newCol > colSize - 1) continue;
                     if (maps[newRow][newCol] != EMPTY) continue;
                     
+                    // int 배열 안에 해당 수가 포함되어 있는지 확인 코드
                     if (IntStream.of(selected).anyMatch(x -> x == newRow*colSize + newCol)) continue;
 
                     if (virusVisited[newRow][newCol]) continue;
