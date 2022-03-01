@@ -9,49 +9,49 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-class Number {
+class CustomNumber {
   int num;
   int order;
 
-  public Number(int num, int order) {
+  public CustomNumber(int num, int order) {
     this.num = num;
     this.order = order;
   }
 
   @Override
   public boolean equals(Object obj) {
-    Number compared = (Number) obj;
+    CustomNumber compared = (CustomNumber) obj;
     return this.num == compared.num && this.order == compared.num;
   }
 
 }
 
-class HighPriority extends Number implements Comparable<Number> {
+class HighPriority extends CustomNumber implements Comparable<CustomNumber> {
 
   HighPriority(int num, int order) {
     super(num, order);
   }
 
   @Override
-  public int compareTo(Number o) {
+  public int compareTo(CustomNumber o) {
     return o.num - num;
   }
 }
 
-class LowPriority extends Number implements Comparable<Number> {
+class LowPriority extends CustomNumber implements Comparable<CustomNumber> {
 
   LowPriority(int num, int order) {
     super(num, order);
   }
 
   @Override
-  public int compareTo(Number o) {
+  public int compareTo(CustomNumber o) {
     return num - o.num;
   }
 }
 
 public class BJ7662 {
-  static Set<Number> shared = new HashSet<>();
+  static Set<CustomNumber> shared = new HashSet<>();
   static BufferedReader br;
 
   static final String INSERT = "I";
@@ -70,8 +70,8 @@ public class BJ7662 {
   public static void solution() throws NumberFormatException, IOException {
     StringTokenizer st;
 
-    Queue<Number> highPQueue = new PriorityQueue<>();
-    Queue<Number> lowPQueue = new PriorityQueue<>();
+    Queue<CustomNumber> highPQueue = new PriorityQueue<>();
+    Queue<CustomNumber> lowPQueue = new PriorityQueue<>();
 
     int k = Integer.parseInt(br.readLine());
 
@@ -82,7 +82,7 @@ public class BJ7662 {
       int num = Integer.parseInt(st.nextToken());
 
       if (op.equals(INSERT)) {
-        Number n = new HighPriority(num, k);
+        CustomNumber n = new HighPriority(num, k);
         highPQueue.add(new HighPriority(num, k));
         lowPQueue.add(new LowPriority(num, k));
         continue;
@@ -107,12 +107,12 @@ public class BJ7662 {
 
   }
 
-  public static Integer deleteQueue(Queue<Number> queue) {
+  public static Integer deleteQueue(Queue<CustomNumber> queue) {
     while (!queue.isEmpty() && shared.contains(queue.peek()))
       queue.poll();
 
     if (!queue.isEmpty()) {
-      Number val = queue.poll();
+      CustomNumber val = queue.poll();
       shared.add(val);
 
       return val.num;

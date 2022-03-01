@@ -33,7 +33,7 @@ class Number {
       return false;
     if (object == this)
       return true;
-    Number number = (Number) object;
+    CustomNumber number = (CustomNumber) object;
     // System.out.println("this: " + this.hashCode() + "number: " +
     // number.hashCode());
     if (this.hashCode() == number.hashCode() && this.order == number.order && this.num == number.num)
@@ -43,33 +43,33 @@ class Number {
 
 }
 
-class HighPriority extends Number implements Comparable<Number> {
-
-  HighPriority(int num, int order) {
-    super(num, order);
-  }
-
-  @Override
-  public int compareTo(Number o) {
-    return o.num - num;
-  }
-}
-
-class LowPriority extends Number implements Comparable<Number> {
-
-  LowPriority(int num, int order) {
-    super(num, order);
-  }
-
-  @Override
-  public int compareTo(Number o) {
-    return num - o.num;
-  }
-}
+//class HighPriority extends CustomNumber implements Comparable<CustomNumber> {
+//
+//  HighPriority(int num, int order) {
+//    super(num, order);
+//  }
+//
+//  @Override
+//  public int compareTo(CustomNumber o) {
+//    return o.num - num;
+//  }
+//}
+//
+//class LowPriority extends CustomNumber implements Comparable<CustomNumber> {
+//
+//  LowPriority(int num, int order) {
+//    super(num, order);
+//  }
+//
+//  @Override
+//  public int compareTo(CustomNumber o) {
+//    return num - o.num;
+//  }
+//}
 
 public class BJ11286 {
 
-  static Set<Number> shared = new HashSet<>();
+  static Set<CustomNumber> shared = new HashSet<>();
   static BufferedReader br;
 
   static final String INSERT = "I";
@@ -87,8 +87,8 @@ public class BJ11286 {
   public static void solution() throws NumberFormatException, IOException {
     StringTokenizer st;
 
-    Queue<Number> highPQueue = new PriorityQueue<>();
-    Queue<Number> lowPQueue = new PriorityQueue<>();
+    Queue<CustomNumber> highPQueue = new PriorityQueue<>();
+    Queue<CustomNumber> lowPQueue = new PriorityQueue<>();
 
     int k = Integer.parseInt(br.readLine());
 
@@ -129,12 +129,12 @@ public class BJ11286 {
 
   }
 
-  public static Integer deleteQueue(Queue<Number> queue) {
+  public static Integer deleteQueue(Queue<CustomNumber> queue) {
     while (!queue.isEmpty() && shared.contains(queue.peek()))
       queue.poll();
 
     if (!queue.isEmpty()) {
-      Number val = queue.poll();
+      CustomNumber val = queue.poll();
       shared.add(val);
 
       return val.num;
