@@ -33,12 +33,13 @@ public class BJ6087 {
         visited = new int[2][row][col];
         Queue<int[]> queue = new LinkedList<>();
 
+
         int cnt = -1;
         for (int r = 0; r < row; r++) {
             String curRow = br.readLine();
             for (int c = 0; c < col; c++) {
                 map[r][c] = curRow.charAt(c);
-                if(map[r][c] == TARGET) {
+                if(map[r][c] == TARGET && cnt < 1) {
                     start[++cnt] = new int[] {r, c};
                     // 상 {row, col, used, direction, which target}
                     queue.add(new int[] {start[cnt][0], start[cnt][1], 0, 0, cnt});
@@ -51,6 +52,7 @@ public class BJ6087 {
                 }
             }
         }
+
 
         System.out.println(searchPath(queue, start));
 
